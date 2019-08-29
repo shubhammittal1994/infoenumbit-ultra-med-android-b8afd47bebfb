@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_mistabicon"
+        android:title="Mis Ejercicios" />
+
+    <item
+        android:id="@+id/events"
+        android:icon="@drawable/ic_report_tab"
+        android:title="Reportes" />
+
+
+    <item
+        android:id="@+id/add"
+        android:icon="@drawable/ic_alertas_tab"
+
+        android:title="Alertas" />
+    <item
+        android:id="@+id/top_user"
+        android:icon="@drawable/ic_notas_tab"
+        android:title="Notas" />
+
+
+</menu>

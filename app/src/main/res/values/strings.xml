@@ -1,0 +1,275 @@
+<resources>
+    <string name="app_name">UltraMed</string>
+
+
+    <string name="notas_first">Es muy importante que lea cuidadosamente y esté de acuerdo con las siguientes notas médicas antes de comenzar su rutina de ejercicios de Higiene Articular:</string>
+    <string name="notas_second">Previo al inicio de cualquier rutina de ejercicios, es indispensable que siempre consulte con su médico especialmentre en el caso de mujeres embarazadas, lactantes o si padece de alguna condición médica.</string>
+    <string name="notas_third">Es importante que lea cuidadosamente las instrucciones de cada ejercicio y lo entienda perfectamente antes de realizarlo.</string>
+    <string name="notas_fourth">Realice los ejercicios de forma lenta y con movimientos pausados y sostenidos.</string>
+    <string name="notas_fifth">NO realice ejercicio alguno que le cause dolor y en caso de que esto suceda, consulte inmediatamente a su médico.</string>
+    <string name="notas_six">Si cree que tiene una emergencia médica, consulte inmediatamente a su médico.</string>
+    <!--<string name="notas_seven"><b><font color="#902960">UltraMed Ⓡ</font></b> no se hace responsable de cualquier lesión o accidente que pueda resultar al utilizar esta aplicación. es exclusivamente la responsabilidad de cada persona y de madie mas el evaluar su capacidad física para valorar si puede y realizar cada ejercicio.</string>-->
+    <string name="notas_seven"><b><font color="#902960">UltraMed Ⓡ</font></b> no se hace responsable de cualquier lesión o accidente que pueda resultar al utilizar esta aplicación. es exclusivamente la responsabilidad de cada persona y de nadie más el evaluar su capacidad física para valorar si puede realizar cada ejercicio.</string>
+
+    <!--<string name="desc_first">El objetivo principal de esta aplicación de higiene articular es mejorar su calidad de vida y conservar su grado de movilidad.</string>-->
+    <string name="desc_first">El objetivo principal de esta aplicación es mejorar su higiene articular y su grado de movilidad.</string>
+    <string name="desc_second"><Dise></Dise>Mediante la aplicación usted podrá definir el horario y la periodicidad de su rutina, además podrá consultar reportes de su actividad diaria y mensual.</string>
+    <string name="desc_third">El realizar la rutina completa de Higiene Articular le consumirá aproximadamente 10 min.de su tiempo y a cambio, su constancia y disciplina le redituará con creces en su calidad de vida.</string>
+    <string name="desc_fourth">El realizar la rutina completa de Higiene Articular no le consumirá más de 10 min.de su tiempo y a cambio, su constancia y disciplina le redituará con creces en su calidad de vida.</string>
+    <string name="cuello">Cuello</string>
+    <string name="humbros">Hombros</string>
+    <!--<string name="codos">Columna</string>-->
+    <string name="codos">Codos</string>
+    <!--<string name="cadera">Cadera</string>-->
+    <string name="cadera">Columna</string>
+    <string name="munacas">Manos</string>
+    <string name="dedos">Manos</string>
+    <string name="rodillas">Rodillas</string>
+    <string name="tobillos">Tobillos</string>
+
+    <array name="cuello1">
+        <item>Sentado o de pie.
+        </item>
+        <item>Sentado o de pie.</item>
+        <item>Sentado o de pie.</item>
+    </array>
+    <array name="cuello2">
+        <item>Incline la cabeza hacia delante hasta que la barbilla toque el pecho y regrese la cabeza a la posición inicial.</item>
+        <item>Dirija la cabeza hacia el lado derecho tratando de tocar el hombro con la oreja sin subir los hombros.</item>
+        <item>Gire la cabeza hacia el lado derecho y después al lado izquierdo, levando la mirada hacia un lado y al otro por encima de los hombros.</item>
+    </array>
+    <array name="cuello3">
+        <item>Repita el movimiento 10 veces.</item>
+        <item>Realice el movimiento 10 veces y repita del lado izquierdo</item>
+        <item>Repita este movimiento 10 veces.</item>
+
+        <!--<item>Realice el movimiento 10 veces y repita del lado izquierdo.</item>-->
+
+    </array>
+
+    <array name="humbros1">
+        <item>De pie con los brazos relajados a los lados del cuerpo, suba los hombros hacia sus orejas.
+        </item>
+        <item>De pie con los brazos relajados a los lados del cuerpo, dibuje círculos con sus hombros hacia el frente 10 veces.
+        </item>
+        <item>Entrelace sus manos y extienda los brazos al nivel de los hombros.
+        </item>
+    </array>
+
+    <array name="humbros2">
+        <item>Sostenga la posición 5 tiempos y después relaje los hombros a su posición natural.</item>
+        <item>Repita el movimiento hacia atrás otras 10 veces.</item>
+        <item>Sostenga la posición 5 tiempos y relaje</item>
+    </array>
+
+    <array name="humbros3">
+        <item>Repita este movimiento 10 veces.</item>
+
+    </array>
+
+    <array name="codos1">
+        <item>Doble los antebrazos a un ángulo de 90°.
+        </item>
+        <item>De pie y con los brazos pegados al cuerpo.
+        </item>
+        <item>Por sobre sucabeza,tome con la mano derecha el codo izquierdo y presione ligeramente hecia abajo. Sostenga 5 tiempos
+        </item>
+    </array>
+
+    <array name="codos2">
+        <item>Gire los antebrazos para que las palmas vean hacia abajo y luego hacia arriba.
+        </item>
+        <item>Extienda y doble hacia adelante los brazos 10 veces.
+        </item>
+        <item>Repita el ejercico con la mano izquierda
+        </item>
+    </array>
+
+    <array name="codos3">
+        <item>Repita el movimiento 10 veces.
+        </item>
+
+    </array>
+
+    <array name="muneca1">
+        <item>Con las palmas de las manos viendo hacia abajo, suba y baje la muñeca 10 veces sin mover todo el brazo.
+        </item>
+        <item>Alineada su mano con el antebrazo, gire la muñeca a la izquierda y a la derecha 10 veces para cada lado.
+        </item>
+        <item>Gire sus manos en cìrculos primero en un sentido 10 veces y posteriormente hacia el otro sentido el mismo número de veces.</item>
+        <item>Gire sus manos en cìrculos primero en un sentido 10 veces y posteriormente hacia el otro sentido el mismo número de veces.</item>
+        <item>Junte y separe las yemas de sus cinco dedos 10 veces.</item>
+        <item>Flexione y extienda sus dedos un total de 10 veces.</item>
+    </array>
+
+  <array name="muneca2">
+        <item>Repita este movimento con la otro mano.</item>
+        <item>Repita este movimento con la otro mano.</item>
+        <item>Repita este movimento con la otro mano.</item>
+        <item>Repita este movimento con la otro mano.</item>
+    </array>
+
+    <array name="dedos1">
+        <item>Junte y separe las yemas de sus cinco dedos 10 veces.</item>
+        <item>Flexione y extienda sus dedos un total de 10 veces.</item>
+    </array>
+
+   <!-- <array name="dedos2">
+        <item>Junte las puntas de los cinco dedos y a continuación sepárelas.</item>
+        <item>Doble y estire dedos.</item>
+    </array>-->
+
+    <array name="cadena1">
+        <item>Acostado boca arriba flexione sus rodillas al pecho. Sostenga 5 tiempos.
+        </item>
+        <item>Acostado boca arriba con los brazos extendidos a los lados y con ambas rodillas flexionadas al pecho, gire cadera y rodillas a la derecha sin despegar el tronco y sus hombros del piso.  Sostenga 10 tiempos.
+        </item>
+        <item>Acuéstese boca arriba con los brazos a los costados, las rodillas flexionadas y ambos pies apoyados en el piso separados el uno del otro la distancia del ancho de sus caderas.</item>
+        <item>Colóquese en cautro puntos viendo hacia enfrente, las manos bajo sus hombros, las rodillas alneadas con la cadera y la parte baja de la espaida arqueada. Sostenga 5 tiempos </item>
+        <item>Cos los oies separados, extienda su brazo derecho hacia arriba </item>
+        <item>Coloque sus pies separados el ancho de sus caderas, las rodillas ligeramente doblades y los  brazos a los lados</item>
+
+    </array>
+
+    <array name="cadena2">
+        <item>Baje las piernas al piso sin extender rodillas.
+        </item>
+        <item>Regrese a la posición inicial y ahora haga el movimiento hacia la izquierda.</item>
+        <item>Apirta los glúteos, sumiendo el ombligo</item>
+        <item>Baje lentamente la cabeza hacia el pecho al mismo tiempo que empuja su columna hacia el techo contrayendo la región abdominal. Sostenga 5 tiempos. </item>
+        <item>Doble su torso llevando el brazo derecho al lado contratio sin girar su cadera. Sostenga 5 tiempos</item>
+        <item>Doble el tronco hacia edelante con la cebeza relajada </item>
+    </array>
+    <array name="cadena3">
+        <item>Haga 10 repeticiones.
+        </item>
+        <item>aa
+        </item>
+
+ <item>Sostenga 5 tiempos y relaje
+        </item>
+<item>Repita 10 veces
+        </item>
+<item>Repita del lado izquierdo Haga 10 repeticiones
+        </item>
+<item>Sostenga los codos con sus manos y balanceándos ligeramente hacia la derecha y después  la  izquierda
+        </item>
+
+    </array>
+    <array name="cadena4">
+        <item>aa
+        </item>
+        <item>aa
+        </item>
+
+ <item>Haga 10 repeticiones.
+        </item>
+<item>aa
+        </item>
+<item>aa
+        </item>
+<item>Haga 10 repeticiones
+        </item>
+
+    </array>
+
+   <!-- <array name="cadena3">
+        <item>Sostener 5 tiempos, relajar y bajar, 10 repeticiones.</item>
+        <item>Bajar las piernas apoyando los pies en el piso sin extender rodillas.10
+            repeticiones.
+        </item>
+        <item>No mover el tronco y no despegar los hombros del piso.10 repeticiones.</item>
+    </array>
+-->
+    <array name="rodillas1">
+        <item>Sujetando el respaldo de una silla, doble su pierna derecha hacia sus glúteos para sostenerla con la mano del mismo lado 5 tiempos.
+        </item>
+        <item>Apoyado con su mano izquierda de un muro doble su pierna derecha hacia adelanta para sostenga con la mano del mismo lado. Sostenga 5 tiempos
+        </item>
+ <item>Apoyado con su mano izquierda de un muro doble su pierna derecha hacia atrás para sostenga con la mano del mismo lado. Sostenga 5 tiempos
+        </item>
+<item>Sujetando con ambas manos el respaldo de una silla, haga  una sentadilla bajanda los glúteos como si fuera a sentyarse sin que ias rodillas rebasen las puntas de los pies
+        </item>
+
+    </array>
+    <array name="rodillas2">
+        <item>Repita este ejercicio con el pie izquierdo.</item>
+        <!--<item>Baje la pierna apoyando nuevamente el talón y regresando a la posición inicial.</item>-->
+        <item>Repita el movimiento con la pierna izquierda.
+        </item>
+        <item>Repita el movimiento con la pierna izquierda.
+        </item>
+        <item>Repita el movimiento 5 veces
+        </item>
+    </array>
+    <array name="rodillas3">
+        <item>aa</item>
+
+    </array>
+
+    <array name="tobillos1">
+        <item>Acuéstese boca arriba con las piernas extendidas y los pies relajados.</item>
+        <item>Acuéstese boca arriba con las piernas extendidas y los pies relajados.
+        </item>
+        <item>Acuéstese boca arriba con las piernas extendidas, los pies relajados y ligeramente separados.
+        </item>
+    </array>
+    <array name="tobillos2">
+        <item>Realice 10 veces con ambos pies el movimiento de “talón y punta”.</item>
+        <item>Dirija la planta de sus pies primero hacia adentro y luego hacia afuera sin mover las piernas, sólo la articulación del tobillo.
+        </item>
+        <item>Dibuje círculos con sus pies primero hacia adentro y posteriormente hacia afuera hasta completar 10 repeticiones en cada dirección.
+        </item>
+    </array>
+    <array name="tobillos3">
+        <item>aa
+        </item>
+        <item>Repita el ejercicio 10 veces.</item>
+
+    </array>
+
+
+    <!--calendar-->
+    <string name="material_calendar_monday">M</string>
+    <string name="material_calendar_tuesday">T</string>
+    <string name="material_calendar_wednesday">W</string>
+    <string name="material_calendar_thursday">T</string>
+    <string name="material_calendar_friday">F</string>
+    <string name="material_calendar_saturday">S</string>
+    <string name="material_calendar_sunday">S</string>
+
+    <!-- <array name="material_calendar_months_array">
+         <item>January</item>
+         <item>February</item>
+         <item>March</item>
+         <item>April</item>
+         <item>May</item>
+         <item>June</item>
+         <item>July</item>
+         <item>August</item>
+         <item>September</item>
+         <item>October</item>
+         <item>November</item>
+         <item>December</item>
+     </array>-->
+
+    <array name="material_calendar_months_array">
+        <item>Janeiro</item>
+        <item>Fevereiro</item>
+        <item>Março</item>
+        <item>Abril</item>
+        <item>Maio</item>
+        <item>Junho</item>
+        <item>Julho</item>
+        <item>Agosto</item>
+        <item>Setembro</item>
+        <item>Outubro</item>
+        <item>Novembro</item>
+        <item>Dezembro</item>
+    </array>
+
+    <string name="material_calendar_today_button">Today</string>
+    <string name="material_calendar_positive_button">OK</string>
+    <string name="material_calendar_negative_button">Cancel</string>
+
+</resources>

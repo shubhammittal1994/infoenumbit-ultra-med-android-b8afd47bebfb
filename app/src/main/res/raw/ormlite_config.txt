@@ -1,0 +1,91 @@
+#
+# generated on 2019/01/22 02:55:17
+#
+# --table-start--
+dataClass=com.soccermat.ultramed.models.ExerciseNameModel
+tableName=exercisenamemodel
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=exerciseName
+columnName=ExerciseName
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.soccermat.ultramed.models.SubExerciseNameModel
+tableName=subexercisenamemodel
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=exerciseName
+columnName=ExerciseName
+# --field-end--
+# --field-start--
+fieldName=subExerciseName
+columnName=SubExerciseName
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.soccermat.ultramed.models.SubExerciseDoneModel
+tableName=subexercisedonemodel
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=exerciseId
+columnName=ExerciseId
+# --field-end--
+# --field-start--
+fieldName=subExerciseId
+columnName=SubExerciseId
+# --field-end--
+# --field-start--
+fieldName=date
+columnName=Date
+# --field-end--
+# --field-start--
+fieldName=status
+columnName=Status
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.soccermat.ultramed.models.CalendarModel
+tableName=calendarmodel
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=date
+columnName=Date
+# --field-end--
+# --field-start--
+fieldName=status
+columnName=Status
+# --field-end--
+# --field-start--
+fieldName=month
+columnName=Month
+# --field-end--
+# --field-start--
+fieldName=year
+columnName=Year
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "140401976659",
+    "firebase_url": "https://ultramed-2adf3.firebaseio.com",
+    "project_id": "ultramed-2adf3",
+    "storage_bucket": "ultramed-2adf3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140401976659:android:e5a6ed09fa9876bf",
+        "android_client_info": {
+          "package_name": "com.soccermat.ultramed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140401976659-ni79k5rlor3fnkgc0vk7r6qb7imgr46d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGqxypNtjJCA6_c0VLgp2Vz6hETLuOBpw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140401976659-ni79k5rlor3fnkgc0vk7r6qb7imgr46d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

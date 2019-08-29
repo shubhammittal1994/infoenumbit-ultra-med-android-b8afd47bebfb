@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dp_375">300dp</dimen>
+    <dimen name="dp_325">260dp</dimen>
+    <dimen name="dp_96">48dp</dimen>
+    <dimen name="dp_20">10dp</dimen>
+    <dimen name="dp_12">6dp</dimen>
+    <dimen name="dp_16">9dp</dimen>
+    <dimen name="dp_18">9dp</dimen>
+    <dimen name="dp_10">7dp</dimen>
+    <dimen name="dp_22">11dp</dimen>
+    <dimen name="dp_25">13dp</dimen>
+    <dimen name="dp_30">16dp</dimen>
+    <dimen name="dp_200">120dp</dimen>
+    <dimen name="dp_130">70dp</dimen>
+    <dimen name="dp_24">10dp</dimen>
+    <dimen name="dp_44">24dp</dimen>
+    <dimen name="edittext_height">25dp</dimen>
+    <dimen name="dp_340">260dp</dimen>
+
+    <dimen name="sp_16">8sp</dimen>
+    <dimen name="sp_18">13sp</dimen>
+    <dimen name="sp_20">10sp</dimen>
+    <dimen name="sp_10">6sp</dimen>
+    <dimen name="sp_14">7sp</dimen>
+    <dimen name="sp_12">7sp</dimen>
+
+    <dimen name="splash_text">25dp</dimen>
+    <dimen name="dp_280">200dp</dimen>
+
+    <dimen name="exercise_height">130dp</dimen>
+
+    <dimen name="dp_42">30dp</dimen>
+    <dimen name="dp_47">32dp</dimen>
+</resources>

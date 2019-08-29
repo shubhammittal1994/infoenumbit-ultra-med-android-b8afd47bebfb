@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FEB913</color>
+    <color name="colorPrimaryDark">#FEB913</color>
+    <color name="colorAccent">#FEB913</color>
+
+        <color name="yellow">#FDF000</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="text_color">#FC6226</color>
+
+    <color name="seprator">#E7E7E7</color>
+
+    <color name="blue_button">#51B8E1</color>
+    <color name="blue_button_bottom">#2BA7DB</color>
+    <color name="accept_button">#C9A7C0</color>
+    <color name="active">#0075C5</color>
+
+    <array name="tab_colors">
+        <item name="tab_1">#FC6226</item>
+        <item name="tab_2">#FC6226</item>
+        <item name="tab_3">#FC6226</item>
+        <item name="tab_4">#FC6226</item>
+
+    </array>
+
+    <color name="alarm_title_active">#444444</color>
+    <color name="alarm_title_outdated">#888888</color>
+    <color name="button_blue_color">#00AC96</color>
+    <color name="button_red_color">#ED1D24</color>
+    <color name="watch_time_text_color">#00A651</color>
+
+    <!--calendar-->
+    <color name="daysLabelColor">#8A000000</color>
+    <color name="currentMonthDayColor">#de000000</color>
+    <color name="nextMonthDayColor">#1F000000</color>
+    <color name="disabledDialogButtonColor">#1F000000</color>
+
+    <color name="itemHighlightColor">#1F000000</color>
+
+    <color name="defaultColor">#2962FF</color>
+</resources>
