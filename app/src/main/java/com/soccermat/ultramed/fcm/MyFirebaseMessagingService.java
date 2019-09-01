@@ -32,12 +32,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
 
         if (remoteMessage.getNotification().getBody() != null) {
-
-            NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
             Intent intent = new Intent(this, SplashActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             showNotification(getApplicationContext(), "Dad", remoteMessage.getNotification().getBody(), intent);
-            //  notificationUtils.showNotificationMessage("working","dsd","",new Intent(getApplicationContext(), SplashActivity.class));
+
         }
 
 
