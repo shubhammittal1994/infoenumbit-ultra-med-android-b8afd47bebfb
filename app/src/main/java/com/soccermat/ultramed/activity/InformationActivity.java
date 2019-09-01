@@ -27,13 +27,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 import static java.net.HttpURLConnection.HTTP_OK;
 
 public class InformationActivity extends AppCompatActivity implements View.OnClickListener {
     CardView btnSubmit;
     TextView tvAviso;
-    EditText edtName, edtSurName, edtEmail, edtPhone, edtParents, edtCity, edtPostal;
+    EditText edtName, edtSurName, edtEmail, edtPhone, edtParents, edtCity, edtPostal,edtPassword,edtConfirmpassword;
 
 
     @Override
@@ -52,6 +51,8 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
         edtName = findViewById(R.id.edtName);
         edtSurName = findViewById(R.id.edtSurName);
         edtEmail = findViewById(R.id.edtEmail);
+        edtPassword=findViewById(R.id.edtPassword);
+        edtConfirmpassword=findViewById(R.id.edtConfirmpassword);
         edtPhone = findViewById(R.id.edtPhone);
         edtParents = findViewById(R.id.edtParents);
         edtCity = findViewById(R.id.edtCity);
@@ -95,7 +96,21 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
             Toast.makeText(this, "Please enter Email", Toast.LENGTH_SHORT).show();
         } else if (!isValidEmail(edtEmail.getText().toString())) {
             Toast.makeText(this, "Please enter valid Email", Toast.LENGTH_SHORT).show();
-        } else if (edtPhone.getText().toString().equalsIgnoreCase("")) {
+        }
+        else if (edtPassword.getText().toString().equalsIgnoreCase("")) {
+            Toast.makeText(this, "Please enter Password", Toast.LENGTH_SHORT).show();
+        }
+        else if (edtPassword.getText().length()<8) {
+            Toast.makeText(this, "Password should be at least 8 characters", Toast.LENGTH_SHORT).show();
+        }
+
+        else if (edtConfirmpassword.getText().toString().equalsIgnoreCase("")) {
+            Toast.makeText(this, "Please confirm Password", Toast.LENGTH_SHORT).show();
+        }
+        else if (!edtPassword.getText().toString().equals(edtConfirmpassword.getText().toString())) {
+            Toast.makeText(this, "Wrong password", Toast.LENGTH_SHORT).show();
+        }
+        else if (edtPhone.getText().toString().equalsIgnoreCase("")) {
             Toast.makeText(this, "Please enter Teléfono", Toast.LENGTH_SHORT).show();
         } else if (edtParents.getText().toString().equalsIgnoreCase("")) {
             Toast.makeText(this, "Please enter país", Toast.LENGTH_SHORT).show();
@@ -132,7 +147,7 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
         message1 += "<strong><font size=\"3\">Akram</font></strong><br>";
 
         String message = "<br> Nombre: " + edtName.getText().toString() + "<br> Apellido: " + edtSurName.getText().toString()
-                + "<br> Email: " + edtEmail.getText().toString() + "<br> Teléfono: " + edtPhone.getText().toString() +
+                + "<br> Email: " + edtEmail.getText().toString() +"<br> contraseña: " + edtPassword.getText().toString() +"<br> Confirmar contraseña: " + edtConfirmpassword.getText().toString()  + "<br> Teléfono: " + edtPhone.getText().toString() +
                 "<br> país: " + edtParents.getText().toString() + "<br> Ciudad: " + edtCity.getText().toString()
                 + "<br> Código Postal: " + edtPostal.getText().toString();
 

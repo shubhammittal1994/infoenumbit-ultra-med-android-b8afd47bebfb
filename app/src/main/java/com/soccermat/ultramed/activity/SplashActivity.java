@@ -7,15 +7,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.UpdateBuilder;
+import com.j256.ormlite.stmt.Where;
 import com.soccermat.ultramed.R;
 import com.soccermat.ultramed.database.OrmLiteDB;
 import com.soccermat.ultramed.helper.StaticSharedpreference;
 import com.soccermat.ultramed.models.ExerciseNameModel;
 import com.soccermat.ultramed.models.SubExerciseNameModel;
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.UpdateBuilder;
-import com.j256.ormlite.stmt.Where;
 
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
@@ -46,7 +46,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 if (StaticSharedpreference.getInfo("page", SplashActivity.this) == null ||
                         StaticSharedpreference.getInfo("page", SplashActivity.this).equalsIgnoreCase("")) {
-                    startActivity(new Intent(SplashActivity.this, InformationActivity.class));
+                    startActivity(new Intent(SplashActivity.this, loginActivity.class));
                 } else if (StaticSharedpreference.getInfo("page", SplashActivity.this).equalsIgnoreCase("notas")) {
                     startActivity(new Intent(SplashActivity.this, MedicalGradeActivity.class));
                 } else {
