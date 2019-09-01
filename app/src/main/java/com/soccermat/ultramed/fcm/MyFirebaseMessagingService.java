@@ -34,7 +34,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getNotification().getBody() != null) {
             Intent intent = new Intent(this, SplashActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            showNotification(getApplicationContext(), "Dad", remoteMessage.getNotification().getBody(), intent);
+            showNotification(getApplicationContext(), "Ultramed", remoteMessage.getNotification().getBody(), intent);
 
         }
 
@@ -61,7 +61,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (useWhiteIcon) {
             mBuilder = new NotificationCompat.Builder(context, channelId)
                     .setSmallIcon(R.drawable.app_icon)
-                    .setContentTitle("ultramed")
+                    .setContentTitle(title)
                     .setContentText(body)
                     .setAutoCancel(true)
                     .setColor(getApplication().getResources().getColor(R.color.colorPrimary))
