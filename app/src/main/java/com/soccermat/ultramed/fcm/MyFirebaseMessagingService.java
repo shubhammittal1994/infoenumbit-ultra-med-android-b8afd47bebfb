@@ -36,7 +36,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
             Intent intent = new Intent(this, SplashActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            showNotification(getApplicationContext(), "Dad", "addada", intent);
+            showNotification(getApplicationContext(), "Dad", remoteMessage.getNotification().getBody(), intent);
             //  notificationUtils.showNotificationMessage("working","dsd","",new Intent(getApplicationContext(), SplashActivity.class));
         }
 
