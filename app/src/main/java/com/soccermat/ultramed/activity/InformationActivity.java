@@ -124,6 +124,40 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
         return false;
     }
 
+
+    void registerUser(){
+        RetrofitClient.getInstance()
+                .getApi()
+                .sendEmail(from, to, subject, message)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                        Log.v("akram", "response " + response);
+                        if (response.code() == HTTP_OK) {
+                            try {
+                                JSONObject obj = new JSONObject(response.body().string());
+                                // Toast.makeText(InformationActivity.this, obj.getString("message"), Toast.LENGTH_LONG).show();
+                                StaticSharedpreference.saveInfo("page", "notas", InformationActivity.this);
+                                startActivity(new Intent(InformationActivity.this, MedicalGradeActivity.class));
+
+                            } catch (JSONException | IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(InformationActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+
+                });
+
+    }
+
+
     public boolean isValidEmail(String address) {
 
         if (address != null || !address.equals("")) {
