@@ -18,5 +18,16 @@ public interface Api {
     );
 
 
+ @POST("/api/register")
+    Call<UserList> registerUser(@Field("name") String name, @Field("job") String job);
+
+
+
+    @POST("/api/register")
+    Call<UserList> loginUser(@Field("name") String name, @Field("job") String job);
+
+    @POST("/api/register")
+    Call<UserList> logoutUser(@Field("name") String name, @Field("job") String job);
+
 
 }

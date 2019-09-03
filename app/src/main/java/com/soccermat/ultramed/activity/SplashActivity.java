@@ -46,7 +46,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 if (StaticSharedpreference.getInfo("page", SplashActivity.this) == null ||
                         StaticSharedpreference.getInfo("page", SplashActivity.this).equalsIgnoreCase("")) {
-                    startActivity(new Intent(SplashActivity.this, loginActivity.class));
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 } else if (StaticSharedpreference.getInfo("page", SplashActivity.this).equalsIgnoreCase("notas")) {
                     startActivity(new Intent(SplashActivity.this, MedicalGradeActivity.class));
                 } else {

@@ -126,19 +126,18 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
 
 
     void registerUser(){
-        RetrofitClient.getInstance()
-                .getApi()
-                .sendEmail(from, to, subject, message)
+        RetrofitClient.getClient()
+                .registerUser()
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                        Log.v("akram", "response " + response);
+                        Log.v("->>>" , response.toString());
                         if (response.code() == HTTP_OK) {
                             try {
                                 JSONObject obj = new JSONObject(response.body().string());
                                 // Toast.makeText(InformationActivity.this, obj.getString("message"), Toast.LENGTH_LONG).show();
-                                StaticSharedpreference.saveInfo("page", "notas", InformationActivity.this);
+                                //StaticSharedpreference.saveInfo("page", "notas", InformationActivity.this);
                                 startActivity(new Intent(InformationActivity.this, MedicalGradeActivity.class));
 
                             } catch (JSONException | IOException e) {

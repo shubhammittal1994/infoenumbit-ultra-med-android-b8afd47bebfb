@@ -69,7 +69,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.soccermat.ultramed.activity.loginActivity"
+            android:name="com.soccermat.ultramed.activity.LoginActivity"
             android:screenOrientation="portrait" />
 
         <activity
