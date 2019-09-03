@@ -17,4 +17,8 @@ public interface Api {
             @Field("html") String text
     );
 
+
+   /* @POST("/api/register")
+    Call<UserList> doCreateUserWithField(@Field("name") String name, @Field("job") String job);
+*/
 }

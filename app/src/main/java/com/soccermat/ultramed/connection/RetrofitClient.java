@@ -28,13 +28,31 @@ public class RetrofitClient {
     private static final String AUTH = "Basic " + Base64.encodeToString((API_USERNAME + ":" + API_PASSWORD).getBytes(), Base64.NO_WRAP);
 
     private static RetrofitClient mInstance;
-    private Retrofit retrofit;
+    private static Retrofit retrofit;
 
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
     private static HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 
-    public static void configClient() {
+
+    static Retrofit getClient() {
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl("https://codeshades.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();
+
+
+        return retrofit;
+
+    }
+  /*  public static void configClient() {
         httpClient.connectTimeout(30, TimeUnit.MINUTES);
         httpClient.readTimeout(30, TimeUnit.MINUTES);
 
@@ -45,7 +63,7 @@ public class RetrofitClient {
     public static void addLoggingIfNeeded() {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClient.interceptors().add(logging);
-    }
+    }*/
 
 
     private RetrofitClient() {
@@ -90,9 +108,9 @@ public class RetrofitClient {
         return mInstance;
     }
 
-    public Retrofit getClient() {
+   /* public Retrofit getClient() {
         return retrofit;
-    }
+    }*/
 
     public Api getApi() {
         return retrofit.create(Api.class);
