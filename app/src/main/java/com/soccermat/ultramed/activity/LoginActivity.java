@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.soccermat.ultramed.R;
 import com.soccermat.ultramed.connection.RetrofitClient;
 
@@ -85,6 +86,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     boolean validateInfo(){
+
+
+
 
         if (edittext_email.getText().toString().trim().length() > 0) {
             if (edittext_email.getText().toString().trim().matches(emailPattern)) {
