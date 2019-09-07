@@ -19,8 +19,7 @@ public interface Api {
             @Field("subject") String subject,
             @Field("html") String text
     );
-
-
+    @FormUrlEncoded
  @POST("/api/register")
     Call<RegisterResponse> registerUser(@Field("firstname") String firstname, @Field("lastname") String lastname, @Field("country") String country,@Field("city") String city,
                                         @Field("email") String email ,@Field("password") String password, @Field("device_type") String deviceType,

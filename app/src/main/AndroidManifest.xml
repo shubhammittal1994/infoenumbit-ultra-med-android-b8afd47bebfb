@@ -42,7 +42,8 @@
         <service android:name=".activity.MyService" android:stopWithTask="false" />
         <activity
             android:name="com.soccermat.ultramed.activity.InformationActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity
             android:name="com.soccermat.ultramed.activity.MedicalGradeActivity"
             android:screenOrientation="portrait" />
@@ -70,7 +71,8 @@
 
         <activity
             android:name="com.soccermat.ultramed.activity.LoginActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <activity
             android:name="com.soccermat.ultramed.activity.forgotpasswordActivity"

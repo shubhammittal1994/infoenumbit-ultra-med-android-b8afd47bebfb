@@ -1,42 +1,76 @@
 
 package com.soccermat.ultramed.models;
 
-import javax.annotation.Generated;
+
 import com.google.gson.annotations.SerializedName;
 
-@Generated("net.hexar.json2pojo")
-@SuppressWarnings("unused")
+
 public class RegisterResponse {
 
-    @SerializedName("data")
-    private Data mData;
-    @SerializedName("message")
-    private String mMessage;
-    @SerializedName("success")
-    private Boolean mSuccess;
+    private String status_code;
 
-    public Data getData() {
-        return mData;
+    private Data data;
+
+    private String message;
+
+    private String[] errors;
+
+    private String status;
+
+    public String getStatus_code ()
+    {
+        return status_code;
     }
 
-    public void setData(Data data) {
-        mData = data;
+    public void setStatus_code (String status_code)
+    {
+        this.status_code = status_code;
     }
 
-    public String getMessage() {
-        return mMessage;
+    public Data getData ()
+    {
+        return data;
     }
 
-    public void setMessage(String message) {
-        mMessage = message;
+    public void setData (Data data)
+    {
+        this.data = data;
     }
 
-    public Boolean getSuccess() {
-        return mSuccess;
+    public String getMessage ()
+    {
+        return message;
     }
 
-    public void setSuccess(Boolean success) {
-        mSuccess = success;
+    public void setMessage (String message)
+    {
+        this.message = message;
+    }
+
+    public String[] getErrors ()
+    {
+        return errors;
+    }
+
+    public void setErrors (String[] errors)
+    {
+        this.errors = errors;
+    }
+
+    public String getStatus ()
+    {
+        return status;
+    }
+
+    public void setStatus (String status)
+    {
+        this.status = status;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "ClassPojo [status_code = "+status_code+", data = "+data+", message = "+message+", errors = "+errors+", status = "+status+"]";
     }
 
 }

@@ -12,10 +12,12 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.stmt.Where;
 import com.soccermat.ultramed.R;
+import com.soccermat.ultramed.connection.RetrofitClient;
 import com.soccermat.ultramed.database.OrmLiteDB;
 import com.soccermat.ultramed.helper.StaticSharedpreference;
 import com.soccermat.ultramed.models.ExerciseNameModel;
 import com.soccermat.ultramed.models.SubExerciseNameModel;
+import com.soccermat.ultramed.utils.PreferenceManager;
 
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
@@ -29,6 +31,8 @@ public class SplashActivity extends AppCompatActivity {
 
     LinkedHashMap<String, String> subExerciseMap = new LinkedHashMap<>();
 
+    PreferenceManager pref;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,22 +40,31 @@ public class SplashActivity extends AppCompatActivity {
 
         setSubExerciseData();
         saveExerciseAndSubExercise();
-
+        pref=new PreferenceManager(this);
         updateData();
+       /* try {
+            RetrofitClient.disableSSLCertificateChecking();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }*/
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
 
-                if (StaticSharedpreference.getInfo("page", SplashActivity.this) == null ||
+
+                startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+
+               /* if (StaticSharedpreference.getInfo("page", SplashActivity.this) == null ||
                         StaticSharedpreference.getInfo("page", SplashActivity.this).equalsIgnoreCase("")) {
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 } else if (StaticSharedpreference.getInfo("page", SplashActivity.this).equalsIgnoreCase("notas")) {
                     startActivity(new Intent(SplashActivity.this, MedicalGradeActivity.class));
                 } else {
                     startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-                }
+                }*/
                 finish();
 
 

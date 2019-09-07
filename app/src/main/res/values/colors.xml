@@ -28,6 +28,7 @@
     <color name="alarm_title_active">#444444</color>
     <color name="alarm_title_outdated">#888888</color>
     <color name="button_blue_color">#00AC96</color>
+    <color name="button_red_color_light">#F7876F</color>
     <color name="button_red_color">#ED1D24</color>
     <color name="watch_time_text_color">#00A651</color>
 

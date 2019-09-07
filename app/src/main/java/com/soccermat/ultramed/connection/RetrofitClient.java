@@ -1,8 +1,27 @@
 package com.soccermat.ultramed.connection;
 
+import android.content.Context;
+import android.content.res.AssetManager;
 import android.util.Base64;
 
+import com.soccermat.ultramed.R;
+
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -34,22 +53,52 @@ public class RetrofitClient {
     private static HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 
 
-   public static Api getClient() {
+   public static   Api getClient(){
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).readTimeout(90, TimeUnit.SECONDS).connectTimeout(90, TimeUnit.SECONDS).build();
 
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl("https://codeshades.com/")
+       Retrofit retrofitForAPi = new Retrofit.Builder()
+                .baseUrl("http://codeshades.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
 
 
-        return retrofit.create(Api.class);
+        return retrofitForAPi.create(Api.class);
 
+    }
+
+    public static void disableSSLCertificateChecking() {
+        TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+            public X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
+
+            @Override
+            public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
+                // Not implemented
+            }
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
+                // Not implemented
+            }
+        } };
+
+        try {
+            SSLContext sc = SSLContext.getInstance("TLS");
+
+            sc.init(null, trustAllCerts, new java.security.SecureRandom());
+
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
   /*  public static void configClient() {
         httpClient.connectTimeout(30, TimeUnit.MINUTES);
@@ -65,6 +114,28 @@ public class RetrofitClient {
     }*/
 
 
+   /* private SSLContext trustCert(Context context) throws CertificateException,IOException, KeyStoreException,
+            NoSuchAlgorithmException, KeyManagementException {
+       // AssetManager assetManager = context.getResources().openRawResource(R.raw.xrentycom);
+        CertificateFactory cf = CertificateFactory.getInstance("X.509");
+        Certificate ca = cf.generateCertificate(assetManager.open("COMODORSADomainValidationSecureServerCA.crt"));
+
+        // Create a KeyStore containing our trusted CAs
+        String keyStoreType = KeyStore.getDefaultType();
+        KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+        keyStore.load(null, null);
+        keyStore.setCertificateEntry("ca", ca);
+
+        // Create a TrustManager that trusts the CAs in our KeyStore
+        String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+        TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
+        tmf.init(keyStore);
+
+        // Create an SSLContext that uses our TrustManager
+        SSLContext contextSSl = SSLContext.getInstance("TLS");
+        contextSSl.init(null, tmf.getTrustManagers(), null);
+        return contextSSl;
+    }*/
     private RetrofitClient() {
 
 

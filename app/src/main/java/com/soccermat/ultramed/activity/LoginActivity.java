@@ -2,6 +2,7 @@ package com.soccermat.ultramed.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.HideReturnsTransformationMethod;
@@ -11,19 +12,29 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.soccermat.ultramed.R;
 import com.soccermat.ultramed.connection.RetrofitClient;
+import com.soccermat.ultramed.helper.Constants;
 import com.soccermat.ultramed.models.Data;
 import com.soccermat.ultramed.models.loginResponse;
+import com.soccermat.ultramed.utils.DialogueUtils;
+import com.soccermat.ultramed.utils.KeyBoardUtils;
+import com.soccermat.ultramed.utils.PhimpmeProgressBarHandler;
+import com.soccermat.ultramed.utils.PreferenceManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -40,18 +51,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ImageView image_hidepass, image_showpass;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
+    PreferenceManager pref;
+    PhimpmeProgressBarHandler phimpmeProgressBarHandler;
+    ScrollView scrollViewLogin;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         edittext_email = findViewById(R.id.edittext_email);
         edittext_password = findViewById(R.id.edittext_password);
+        scrollViewLogin=findViewById(R.id.paretViewLogin);
         btn_login = findViewById(R.id.btn_login);
         text_forgotpassword = findViewById(R.id.text_forgotpassword);
         text_register = findViewById(R.id.text_register);
         image_hidepass = findViewById(R.id.image_hidepass);
         image_showpass = findViewById(R.id.image_showpass);
+
+        phimpmeProgressBarHandler = new PhimpmeProgressBarHandler(this);
+
+        text_register.setOnClickListener(this);
+        text_forgotpassword.setOnClickListener(this);
+        btn_login.setOnClickListener(this);
+        image_hidepass.setOnClickListener(this);
+        image_showpass.setOnClickListener(this);
+        pref=new PreferenceManager(this);
 
 
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -132,29 +157,47 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void hitLoginApi() {
+        KeyBoardUtils.hideKeyboard(this);
+        phimpmeProgressBarHandler.show();
         RetrofitClient.getClient()
                 .loginUser(edittext_email.getText().toString(),edittext_password.getText().toString())
                 .enqueue(new Callback<loginResponse>() {
                     @Override
                     public void onResponse(Call<loginResponse> call, Response<loginResponse> response) {
 
+                        phimpmeProgressBarHandler.hide();
                         Log.v("->>>" , response.toString());
+
+                        //show user dialog that you havnt activated the link on gmail.
+                        DialogueUtils.alertDialogShow(LoginActivity.this,"Your Error Message");
+
                         if (response.code() == HTTP_OK) {
                             try {
+
+
+                                PhimpmeProgressBarHandler.showSnackBar(scrollViewLogin, response.body().getMessage(),1000);
+
                               //  JSONObject obj = new JSONObject(response.body().toString());
-                                 Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
+                                // Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
                                 //StaticSharedpreference.saveInfo("page", "notas", InformationActivity.this);
+                               pref.setBooleanValues(Constants.IS_LOGGED_IN,true);
                                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                finish();
 
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
+                        else {
+                            PhimpmeProgressBarHandler.showSnackBar(scrollViewLogin, response.body().getMessage(),5000);
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<loginResponse> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                        phimpmeProgressBarHandler.hide();
+                        PhimpmeProgressBarHandler.showSnackBar(scrollViewLogin, t.getMessage(),5000);
+                       // Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
 
 
