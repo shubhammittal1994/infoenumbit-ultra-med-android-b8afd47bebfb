@@ -181,6 +181,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 // Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
                                 //StaticSharedpreference.saveInfo("page", "notas", InformationActivity.this);
                                pref.setBooleanValues(Constants.IS_LOGGED_IN,true);
+
+                               //set-Auth token here
+                               pref.setStringValues(Constants.AUTH_TOKEN,asdadasdasdasd);
                                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                 finish();
 

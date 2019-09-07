@@ -7,6 +7,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface Api {
@@ -27,8 +28,12 @@ public interface Api {
 
 
     @FormUrlEncoded
-    @POST("http://codeshades.com/api/login")
+    @POST("/api/login")
     Call<loginResponse> loginUser(@Field("email") String email, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("/api/logout")
+    Call<loginResponse> logoutUser(@Header("authorization") String token);
 
 //    @POST("/api/register")
 //    Call<UserList> logoutUser(@Field("name") String name, @Field("job") String job);

@@ -11,5 +11,6 @@ public class Constants {
     public static int yearCalendar = 0;
     public static List<CalendarModel> calendarList = new ArrayList<>();
     public static String IS_LOGGED_IN="isLoggedIn";
+    public  static String AUTH_TOKEN="authToken";
 
 }

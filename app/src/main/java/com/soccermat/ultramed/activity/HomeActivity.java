@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.RelativeLayout;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
@@ -18,33 +19,61 @@ import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.TableUtils;
 import com.soccermat.ultramed.R;
+import com.soccermat.ultramed.connection.RetrofitClient;
 import com.soccermat.ultramed.database.OrmLiteDB;
 import com.soccermat.ultramed.fragment.AlertasFragment;
 import com.soccermat.ultramed.fragment.MyExerciseFragment;
 import com.soccermat.ultramed.fragment.NotasFragment;
 import com.soccermat.ultramed.fragment.ReportsFragment;
+import com.soccermat.ultramed.helper.Constants;
 import com.soccermat.ultramed.helper.StaticSharedpreference;
 import com.soccermat.ultramed.models.SubExerciseDoneModel;
 import com.soccermat.ultramed.models.SubExerciseNameModel;
+import com.soccermat.ultramed.models.loginResponse;
+import com.soccermat.ultramed.utils.DialogueUtils;
+import com.soccermat.ultramed.utils.PhimpmeProgressBarHandler;
+import com.soccermat.ultramed.utils.PreferenceManager;
 
 import java.io.File;
 import java.sql.SQLException;
 
-public class HomeActivity extends AppCompatActivity {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static java.net.HttpURLConnection.HTTP_OK;
+
+public class HomeActivity extends AppCompatActivity implements DialogueUtils.AlertDialogListener {
     AHBottomNavigationAdapter navigationAdapter;
     AHBottomNavigation bottomNavigation;
     OrmLiteDB ormLiteDb;
+    DialogueUtils alertDialogHelper;
+    PhimpmeProgressBarHandler phimpmeProgressBarHandler;
+    RelativeLayout relativeLayoutHome;
+    PreferenceManager pref;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         startService(new Intent(getBaseContext(), MyService.class));
         initViews();
+
+        phimpmeProgressBarHandler = new PhimpmeProgressBarHandler(this);
+
+        pref=new PreferenceManager(this);
+        try {
+            // instance of the helper class
+
+            alertDialogHelper = new DialogueUtils(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initViews() {
         bottomNavigation = findViewById(R.id.bottom_navigation);
-
+        relativeLayoutHome = findViewById(R.id.RLHome);
         setNavigation();
     }
 
@@ -80,11 +109,12 @@ public class HomeActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.id_holder, fragment, "Fragment");
         fragmentTransaction.commit();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-
+        alertDialogHelper.showAlertDialog("Draft", "Discard draft ?", "Logout", "Cancel", "", 1, true);
 
 
     }
@@ -96,14 +126,65 @@ public class HomeActivity extends AppCompatActivity {
         }
         return ormLiteDb;
     }
+
     @Override
     protected void onStop() {
         super.onStop();
 
 
+    }
+    private void hitLogoutApi() {
+
+        phimpmeProgressBarHandler.show();
+        RetrofitClient.getClient()
+                .logoutUser(pref.getStringValues(Constants.AUTH_TOKEN))
+                .enqueue(new Callback<loginResponse>() {
+                    @Override
+                    public void onResponse(Call<loginResponse> call, Response<loginResponse> response) {
+
+                        phimpmeProgressBarHandler.hide();
+
+                        if (response.code() == HTTP_OK) {
+                            try {
+
+                                //clear prefrence here
+
+                                finish();
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, response.body().getMessage(), 5000);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<loginResponse> call, Throwable t) {
+                        phimpmeProgressBarHandler.hide();
+                        PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, t.getMessage(), 5000);
+                        // Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+
+                });
 
     }
 
 
+    @Override
+    public void onPositiveClick(int from) {
+        hitLogoutApi();
+    }
 
+
+    @Override
+    public void onNegativeClick(int from) {
+        finish();
+    }
+
+    @Override
+    public void onNeutralClick(int from) {
+
+    }
 }
