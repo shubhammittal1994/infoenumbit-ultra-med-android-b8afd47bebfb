@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.soccermat.ultramed.R;
 import com.soccermat.ultramed.connection.RetrofitClient;
+import com.soccermat.ultramed.models.Data;
+import com.soccermat.ultramed.models.loginResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,16 +53,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         image_showpass = findViewById(R.id.image_showpass);
 
 
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginUser();
+            }
+        });
+
+
     }
 
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.btn_login: {
-                loginUser();
-
-            }
+//            case R.id.btn_login: {
+//
+//
+//            }
             case R.id.text_forgotpassword: {
                 forgetPassword();
 
@@ -89,8 +99,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (edittext_email.getText().toString().trim().length() > 0) {
             if (edittext_email.getText().toString().trim().matches(emailPattern)) {
 
-                if (edittext_password.getText().toString().length() > 8) {
-                    return true;
+                if (edittext_password.getText().toString().length() > 7) {
+
+                    hitLoginApi();
                     //Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "password should be at least 8 characters", Toast.LENGTH_SHORT).show();
@@ -108,9 +119,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     void loginUser() {
-        if(validateInfo()){
-            hitLoginApi();
-        }
+        validateInfo();
+
+
 
 
 
@@ -118,27 +129,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void hitLoginApi() {
         RetrofitClient.getClient()
-                .loginUser("")
-                .enqueue(new Callback<ResponseBody>() {
+                .loginUser(edittext_email.getText().toString(),edittext_password.getText().toString())
+                .enqueue(new Callback<loginResponse>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(Call<loginResponse> call, Response<loginResponse> response) {
 
                         Log.v("->>>" , response.toString());
                         if (response.code() == HTTP_OK) {
                             try {
-                                JSONObject obj = new JSONObject(response.body().string());
-                                // Toast.makeText(InformationActivity.this, obj.getString("message"), Toast.LENGTH_LONG).show();
+                              //  JSONObject obj = new JSONObject(response.body().toString());
+                                 Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
                                 //StaticSharedpreference.saveInfo("page", "notas", InformationActivity.this);
                                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
 
-                            } catch (JSONException | IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(Call<loginResponse> call, Throwable t) {
                         Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
 

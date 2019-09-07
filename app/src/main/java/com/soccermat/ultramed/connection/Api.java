@@ -1,5 +1,8 @@
 package com.soccermat.ultramed.connection;
 
+import com.soccermat.ultramed.models.RegisterResponse;
+import com.soccermat.ultramed.models.loginResponse;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -19,15 +22,17 @@ public interface Api {
 
 
  @POST("/api/register")
-    Call<UserList> registerUser(@Field("name") String name, @Field("job") String job);
+    Call<RegisterResponse> registerUser(@Field("firstname") String firstname, @Field("lastname") String lastname, @Field("country") String country,@Field("city") String city,
+                                        @Field("email") String email ,@Field("password") String password, @Field("device_type") String deviceType,
+                                        @Field("device_token") String deviceToken,@Field("zipcode") String zipcode);
 
 
+    @FormUrlEncoded
+    @POST("http://codeshades.com/api/login")
+    Call<loginResponse> loginUser(@Field("email") String email, @Field("password") String password);
 
-    @POST("/api/register")
-    Call<UserList> loginUser(@Field("name") String name, @Field("job") String job);
-
-    @POST("/api/register")
-    Call<UserList> logoutUser(@Field("name") String name, @Field("job") String job);
+//    @POST("/api/register")
+//    Call<UserList> logoutUser(@Field("name") String name, @Field("job") String job);
 
 
 }

@@ -127,7 +127,8 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
 
     void registerUser(){
         RetrofitClient.getClient()
-                .registerUser()
+                .registerUser(edtName.getText().toString(),edtSurName.getText().toString(),edtParents.getText().toString(),edtCity.getText().toString(),edtEmail.getText().toString(),
+                        edtPassword.getText().toString(),"0",deviceToken,edtPostal.getText().toString())
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
