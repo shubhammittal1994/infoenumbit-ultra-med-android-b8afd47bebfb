@@ -1,23 +1,18 @@
 package com.soccermat.ultramed.activity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.UpdateBuilder;
-import com.j256.ormlite.stmt.Where;
-import com.j256.ormlite.table.TableUtils;
 import com.soccermat.ultramed.R;
 import com.soccermat.ultramed.connection.RetrofitClient;
 import com.soccermat.ultramed.database.OrmLiteDB;
@@ -26,16 +21,10 @@ import com.soccermat.ultramed.fragment.MyExerciseFragment;
 import com.soccermat.ultramed.fragment.NotasFragment;
 import com.soccermat.ultramed.fragment.ReportsFragment;
 import com.soccermat.ultramed.helper.Constants;
-import com.soccermat.ultramed.helper.StaticSharedpreference;
-import com.soccermat.ultramed.models.SubExerciseDoneModel;
-import com.soccermat.ultramed.models.SubExerciseNameModel;
 import com.soccermat.ultramed.models.loginResponse;
 import com.soccermat.ultramed.utils.DialogueUtils;
 import com.soccermat.ultramed.utils.PhimpmeProgressBarHandler;
 import com.soccermat.ultramed.utils.PreferenceManager;
-
-import java.io.File;
-import java.sql.SQLException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -148,6 +137,8 @@ public class HomeActivity extends AppCompatActivity implements DialogueUtils.Ale
                             try {
 
                                 //clear prefrence here
+                                pref.clearPrefrence();
+                                Toast.makeText(getApplicationContext(), "token::"+pref.getStringValues(Constants.AUTH_TOKEN), Toast.LENGTH_SHORT).show();
 
                                 finish();
 

@@ -172,7 +172,7 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
                         phimpmeProgressBarHandler.hide();
                         try {
 
-                            if (response.body().getStatus() == "200") {
+                            if (response.body().getStatus_code() == "200") {
                                 //Print Activation message in dialog and once user click on the ok you will get event in on positive button in bottom of this class
                                 alertDialogHelper.showAlertDialog("Draft", "Discard draft ?", "Discard", "", "", 1, true);
                                 startActivity(new Intent(InformationActivity.this, LoginActivity.class));

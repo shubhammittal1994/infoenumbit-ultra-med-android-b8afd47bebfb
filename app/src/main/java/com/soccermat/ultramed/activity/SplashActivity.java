@@ -14,6 +14,7 @@ import com.j256.ormlite.stmt.Where;
 import com.soccermat.ultramed.R;
 import com.soccermat.ultramed.connection.RetrofitClient;
 import com.soccermat.ultramed.database.OrmLiteDB;
+import com.soccermat.ultramed.helper.Constants;
 import com.soccermat.ultramed.helper.StaticSharedpreference;
 import com.soccermat.ultramed.models.ExerciseNameModel;
 import com.soccermat.ultramed.models.SubExerciseNameModel;
@@ -26,7 +27,7 @@ import java.util.Map;
 
 public class SplashActivity extends AppCompatActivity {
     OrmLiteDB ormLiteDb;
-//    String exerciseName[] = {"cuello", "humbros", "codos", "cadera", "munacas", "dedos", "rodillas", "tobillos"};
+    //    String exerciseName[] = {"cuello", "humbros", "codos", "cadera", "munacas", "dedos", "rodillas", "tobillos"};
     String exerciseName[] = {"cuello", "humbros", "codos", "cadera", "munacas", "rodillas", "tobillos"};
 
     LinkedHashMap<String, String> subExerciseMap = new LinkedHashMap<>();
@@ -40,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
 
         setSubExerciseData();
         saveExerciseAndSubExercise();
-        pref=new PreferenceManager(this);
+        pref = new PreferenceManager(this);
         updateData();
        /* try {
             RetrofitClient.disableSSLCertificateChecking();
@@ -53,18 +54,23 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-
-
-                startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-
-               /* if (StaticSharedpreference.getInfo("page", SplashActivity.this) == null ||
-                        StaticSharedpreference.getInfo("page", SplashActivity.this).equalsIgnoreCase("")) {
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                if (pref.getBooleanValues(Constants.IS_LOGGED_IN)) {
+                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
                 } else if (StaticSharedpreference.getInfo("page", SplashActivity.this).equalsIgnoreCase("notas")) {
                     startActivity(new Intent(SplashActivity.this, MedicalGradeActivity.class));
                 } else {
-                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-                }*/
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                }
+
+
+//                if (StaticSharedpreference.getInfo("page", SplashActivity.this) == null ||
+//                        StaticSharedpreference.getInfo("page", SplashActivity.this).equalsIgnoreCase("")) {
+//                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+//                } else if (StaticSharedpreference.getInfo("page", SplashActivity.this).equalsIgnoreCase("notas")) {
+//                    startActivity(new Intent(SplashActivity.this, MedicalGradeActivity.class));
+//                } else {
+//                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+//                }
                 finish();
 
 
@@ -165,8 +171,8 @@ public class SplashActivity extends AppCompatActivity {
 //                "tobillos_first", "tobillos_second", "tobillos_third"};
 
         String subExerciseName[] = {"cuello_first", "cuello_second", "cuello_third", "humbros_first", "humbros_second", "humbros_third",
-                "codos_first", "codos_second","codos_third", "cadera_first", "cadera_second", "cadera_third","cadera_fourth","cadera_fifth","cadera_sixth", "munacas_first", "munacas_second",
-                "munacas_third","munacas_fourth", "munacas_fifth", "munacas_sixth", "rodillas_first", "rodillas_second","rodillas_third","rodillas_fourth",
+                "codos_first", "codos_second", "codos_third", "cadera_first", "cadera_second", "cadera_third", "cadera_fourth", "cadera_fifth", "cadera_sixth", "munacas_first", "munacas_second",
+                "munacas_third", "munacas_fourth", "munacas_fifth", "munacas_sixth", "rodillas_first", "rodillas_second", "rodillas_third", "rodillas_fourth",
                 "tobillos_first", "tobillos_second", "tobillos_third"};
 
         subExerciseMap.put(subExerciseName[0], exerciseName[0]);
@@ -181,7 +187,7 @@ public class SplashActivity extends AppCompatActivity {
         subExerciseMap.put(subExerciseName[7], exerciseName[2]);
         subExerciseMap.put(subExerciseName[8], exerciseName[2]);
 
-        subExerciseMap.put(subExerciseName[9],  exerciseName[3]);
+        subExerciseMap.put(subExerciseName[9], exerciseName[3]);
         subExerciseMap.put(subExerciseName[10], exerciseName[3]);
         subExerciseMap.put(subExerciseName[11], exerciseName[3]);
         subExerciseMap.put(subExerciseName[12], exerciseName[3]);

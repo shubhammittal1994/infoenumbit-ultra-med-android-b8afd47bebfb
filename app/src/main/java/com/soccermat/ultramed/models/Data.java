@@ -8,6 +8,8 @@ import com.google.gson.annotations.SerializedName;
 @SuppressWarnings("unused")
 public class Data {
 
+    @SerializedName("access_token")
+    private String mAccessToken;
     @SerializedName("city")
     private String mCity;
     @SerializedName("country")
@@ -17,17 +19,23 @@ public class Data {
     @SerializedName("firstname")
     private String mFirstname;
     @SerializedName("isverified")
-    private Long mIsverified;
+    private String mIsverified;
     @SerializedName("lastname")
     private String mLastname;
     @SerializedName("name")
     private String mName;
     @SerializedName("user_id")
     private Long mUserId;
-    @SerializedName("verification_message")
-    private String mVerificationMessage;
     @SerializedName("zipcode")
     private String mZipcode;
+
+    public String getAccessToken() {
+        return mAccessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        mAccessToken = accessToken;
+    }
 
     public String getCity() {
         return mCity;
@@ -61,11 +69,11 @@ public class Data {
         mFirstname = firstname;
     }
 
-    public Long getIsverified() {
+    public String getIsverified() {
         return mIsverified;
     }
 
-    public void setIsverified(Long isverified) {
+    public void setIsverified(String isverified) {
         mIsverified = isverified;
     }
 
@@ -91,14 +99,6 @@ public class Data {
 
     public void setUserId(Long userId) {
         mUserId = userId;
-    }
-
-    public String getVerificationMessage() {
-        return mVerificationMessage;
-    }
-
-    public void setVerificationMessage(String verificationMessage) {
-        mVerificationMessage = verificationMessage;
     }
 
     public String getZipcode() {
