@@ -45,5 +45,12 @@ public class PreferenceManager {
         return getPreferences().getBoolean(key, false);
     }
 
+    public void clearPrefrence(){
+        SharedPreferences preferences = getPreferences();
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
+    }
+
 
 }

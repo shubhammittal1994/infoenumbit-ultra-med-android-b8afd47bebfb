@@ -1,17 +1,17 @@
 
 package com.soccermat.ultramed.models;
 
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
-
 @SuppressWarnings("unused")
-public class LoginResponse {
+public class loginResponse {
 
     @SerializedName("data")
-    private DataLogin mData;
+    private Data mData;
     @SerializedName("errors")
-    private Errors mErrors;
+    private List<Object> mErrors;
     @SerializedName("message")
     private String mMessage;
     @SerializedName("status")
@@ -19,19 +19,19 @@ public class LoginResponse {
     @SerializedName("status_code")
     private Long mStatusCode;
 
-    public DataLogin getData() {
+    public Data getData() {
         return mData;
     }
 
-    public void setData(DataLogin data) {
+    public void setData(Data data) {
         mData = data;
     }
 
-    public Errors getErrors() {
+    public List<Object> getErrors() {
         return mErrors;
     }
 
-    public void setErrors(Errors errors) {
+    public void setErrors(List<Object> errors) {
         mErrors = errors;
     }
 
@@ -60,9 +60,3 @@ public class LoginResponse {
     }
 
 }
-
- class DataLogin {
-
-
-}
-

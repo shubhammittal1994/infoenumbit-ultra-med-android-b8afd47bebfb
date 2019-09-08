@@ -145,9 +145,9 @@ public class HomeActivity extends AppCompatActivity implements DialogueUtils.Ale
         phimpmeProgressBarHandler.show();
         RetrofitClient.getClient()
                 .logoutUser(pref.getStringValues(Constants.AUTH_TOKEN))
-                .enqueue(new Callback<Void>() {
+                .enqueue(new Callback<loginResponse>() {
                     @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
+                    public void onResponse(Call<loginResponse> call, Response<loginResponse> response) {
 
                         phimpmeProgressBarHandler.hide();
 
@@ -155,6 +155,9 @@ public class HomeActivity extends AppCompatActivity implements DialogueUtils.Ale
                             try {
 
                                // PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, HomeActivity.this.getString(R.string.successfully_logout), 000);
+                                //clear prefrence here
+                                pref.clearPrefrence();
+                                Toast.makeText(getApplicationContext(), "token::"+pref.getStringValues(Constants.AUTH_TOKEN), Toast.LENGTH_SHORT).show();
 
                                 pref.setBooleanValues(Constants.IS_LOGGED_IN,false);
                                 pref.setStringValues(Constants.AUTH_TOKEN,null);
@@ -164,14 +167,14 @@ public class HomeActivity extends AppCompatActivity implements DialogueUtils.Ale
                                 e.printStackTrace();
                             }
                         } else {
-                            PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome,HomeActivity.this.getString(R.string.something_went_wrong), 5000);
+                            PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, response.body().getMessage(), 5000);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
+                    public void onFailure(Call<loginResponse> call, Throwable t) {
                         phimpmeProgressBarHandler.hide();
-                        PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome,HomeActivity.this.getString(R.string.something_went_wrong), 5000);
+                        PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, t.getMessage(), 5000);
                         // Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
 

@@ -14,7 +14,6 @@ import com.j256.ormlite.stmt.Where;
 import com.soccermat.ultramed.R;
 import com.soccermat.ultramed.connection.RetrofitClient;
 import com.soccermat.ultramed.database.OrmLiteDB;
-import com.soccermat.ultramed.helper.Constants;
 import com.soccermat.ultramed.helper.StaticSharedpreference;
 import com.soccermat.ultramed.models.ExerciseNameModel;
 import com.soccermat.ultramed.models.SubExerciseNameModel;
@@ -54,23 +53,23 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-
-                if(pref.getBooleanValues(Constants.IS_LOGGED_IN)) {
-
-
+                if (pref.getBooleanValues(Constants.IS_LOGGED_IN)) {
                     startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-                }else{
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                }
-
-               /* if (StaticSharedpreference.getInfo("page", SplashActivity.this) == null ||
-                        StaticSharedpreference.getInfo("page", SplashActivity.this).equalsIgnoreCase("")) {
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 } else if (StaticSharedpreference.getInfo("page", SplashActivity.this).equalsIgnoreCase("notas")) {
                     startActivity(new Intent(SplashActivity.this, MedicalGradeActivity.class));
                 } else {
-                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-                }*/
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                }
+
+
+//                if (StaticSharedpreference.getInfo("page", SplashActivity.this) == null ||
+//                        StaticSharedpreference.getInfo("page", SplashActivity.this).equalsIgnoreCase("")) {
+//                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+//                } else if (StaticSharedpreference.getInfo("page", SplashActivity.this).equalsIgnoreCase("notas")) {
+//                    startActivity(new Intent(SplashActivity.this, MedicalGradeActivity.class));
+//                } else {
+//                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+//                }
                 finish();
 
 
