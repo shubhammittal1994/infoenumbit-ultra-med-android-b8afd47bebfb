@@ -271,5 +271,7 @@
     <string name="material_calendar_today_button">Today</string>
     <string name="material_calendar_positive_button">OK</string>
     <string name="material_calendar_negative_button">Cancel</string>
+    <string name="successfully_logout">Successfully Logout</string>
+    <string name="something_went_wrong">Something went wrong Please try again.</string>
 
 </resources>

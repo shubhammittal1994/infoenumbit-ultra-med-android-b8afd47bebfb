@@ -29,7 +29,7 @@ import com.soccermat.ultramed.helper.Constants;
 import com.soccermat.ultramed.helper.StaticSharedpreference;
 import com.soccermat.ultramed.models.SubExerciseDoneModel;
 import com.soccermat.ultramed.models.SubExerciseNameModel;
-import com.soccermat.ultramed.models.loginResponse;
+
 import com.soccermat.ultramed.utils.DialogueUtils;
 import com.soccermat.ultramed.utils.PhimpmeProgressBarHandler;
 import com.soccermat.ultramed.utils.PreferenceManager;
@@ -111,10 +111,17 @@ public class HomeActivity extends AppCompatActivity implements DialogueUtils.Ale
     }
 
     @Override
+    public void onBackPressed() {
+      //  super.onBackPressed();
+        alertDialogHelper.showAlertDialog("Draft", "Discard draft ?", "Logout", "Cancel", "", 1, true);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        alertDialogHelper.showAlertDialog("Draft", "Discard draft ?", "Logout", "Cancel", "", 1, true);
+        Log.e("call","call");
+
 
 
     }
@@ -138,31 +145,33 @@ public class HomeActivity extends AppCompatActivity implements DialogueUtils.Ale
         phimpmeProgressBarHandler.show();
         RetrofitClient.getClient()
                 .logoutUser(pref.getStringValues(Constants.AUTH_TOKEN))
-                .enqueue(new Callback<loginResponse>() {
+                .enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<loginResponse> call, Response<loginResponse> response) {
+                    public void onResponse(Call<Void> call, Response<Void> response) {
 
                         phimpmeProgressBarHandler.hide();
 
                         if (response.code() == HTTP_OK) {
                             try {
 
-                                //clear prefrence here
+                               // PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, HomeActivity.this.getString(R.string.successfully_logout), 000);
 
+                                pref.setBooleanValues(Constants.IS_LOGGED_IN,false);
+                                pref.setStringValues(Constants.AUTH_TOKEN,null);
                                 finish();
 
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         } else {
-                            PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, response.body().getMessage(), 5000);
+                            PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome,HomeActivity.this.getString(R.string.something_went_wrong), 5000);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<loginResponse> call, Throwable t) {
+                    public void onFailure(Call<Void> call, Throwable t) {
                         phimpmeProgressBarHandler.hide();
-                        PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, t.getMessage(), 5000);
+                        PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome,HomeActivity.this.getString(R.string.something_went_wrong), 5000);
                         // Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
 

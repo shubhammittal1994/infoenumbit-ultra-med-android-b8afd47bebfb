@@ -1,42 +1,68 @@
+
 package com.soccermat.ultramed.models;
+
 
 import com.google.gson.annotations.SerializedName;
 
-public class loginResponse {
 
+@SuppressWarnings("unused")
+public class LoginResponse {
 
+    @SerializedName("data")
+    private DataLogin mData;
+    @SerializedName("errors")
+    private Errors mErrors;
+    @SerializedName("message")
+    private String mMessage;
+    @SerializedName("status")
+    private String mStatus;
+    @SerializedName("status_code")
+    private Long mStatusCode;
 
-        @SerializedName("data")
-        private Data mData;
-        @SerializedName("message")
-        private String mMessage;
-        @SerializedName("success")
-        private Boolean mSuccess;
+    public DataLogin getData() {
+        return mData;
+    }
 
-        public Data getData() {
-            return mData;
-        }
+    public void setData(DataLogin data) {
+        mData = data;
+    }
 
-        public void setData(Data data) {
-            mData = data;
-        }
+    public Errors getErrors() {
+        return mErrors;
+    }
 
-        public String getMessage() {
-            return mMessage;
-        }
+    public void setErrors(Errors errors) {
+        mErrors = errors;
+    }
 
-        public void setMessage(String message) {
-            mMessage = message;
-        }
+    public String getMessage() {
+        return mMessage;
+    }
 
-        public Boolean getSuccess() {
-            return mSuccess;
-        }
+    public void setMessage(String message) {
+        mMessage = message;
+    }
 
-        public void setSuccess(Boolean success) {
-            mSuccess = success;
-        }
+    public String getStatus() {
+        return mStatus;
+    }
 
+    public void setStatus(String status) {
+        mStatus = status;
+    }
+
+    public Long getStatusCode() {
+        return mStatusCode;
+    }
+
+    public void setStatusCode(Long statusCode) {
+        mStatusCode = statusCode;
+    }
+
+}
+
+ class DataLogin {
 
 
 }
+
