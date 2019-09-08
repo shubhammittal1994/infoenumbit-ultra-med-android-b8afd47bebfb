@@ -162,9 +162,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         phimpmeProgressBarHandler.show();
         RetrofitClient.getClient()
                 .loginUser(edittext_email.getText().toString(),edittext_password.getText().toString())
-                .enqueue(new Callback<loginResponse>() {
+                .enqueue(new Callback<LoginResponse>() {
                     @Override
-                    public void onResponse(Call<loginResponse> call, Response<loginResponse> response) {
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                         phimpmeProgressBarHandler.hide();
                         Log.v("->>>" , response.toString());
@@ -184,7 +184,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                pref.setBooleanValues(Constants.IS_LOGGED_IN,true);
 
                                //set-Auth token here
-                               pref.setStringValues(Constants.AUTH_TOKEN,response.body().getData().getAccessToken());
+                              // pref.setStringValues(Constants.AUTH_TOKEN,response.body().getData().getAccessToken());
                                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                 finish();
 
@@ -198,7 +198,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
 
                     @Override
-                    public void onFailure(Call<loginResponse> call, Throwable t) {
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
                         phimpmeProgressBarHandler.hide();
                         PhimpmeProgressBarHandler.showSnackBar(scrollViewLogin, t.getMessage(),5000);
                        // Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();

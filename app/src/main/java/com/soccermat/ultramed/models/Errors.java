@@ -1,31 +1,31 @@
-
 package com.soccermat.ultramed.models;
 
+public class Errors{
+	private String error_Code;
+	private String message;
 
-import com.google.gson.annotations.SerializedName;
+	public void setErrorCode(String errorCode){
+		this.error_Code = errorCode;
+	}
 
+	public String getErrorCode(){
+		return error_Code;
+	}
 
-public class Errors {
+	public void setMessage(String message){
+		this.message = message;
+	}
 
-    @SerializedName("error_code")
-    private Long mErrorCode;
-    @SerializedName("message")
-    private String mMessage;
+	public String getMessage(){
+		return message;
+	}
 
-    public Long getErrorCode() {
-        return mErrorCode;
-    }
-
-    public void setErrorCode(Long errorCode) {
-        mErrorCode = errorCode;
-    }
-
-    public String getMessage() {
-        return mMessage;
-    }
-
-    public void setMessage(String message) {
-        mMessage = message;
-    }
-
+	@Override
+ 	public String toString(){
+		return 
+			"Errors{" + 
+			"error_code = '" + error_Code + '\'' +
+			",message = '" + message + '\'' + 
+			"}";
+		}
 }

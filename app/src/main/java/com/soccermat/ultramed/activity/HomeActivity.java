@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
@@ -145,9 +146,9 @@ public class HomeActivity extends AppCompatActivity implements DialogueUtils.Ale
         phimpmeProgressBarHandler.show();
         RetrofitClient.getClient()
                 .logoutUser(pref.getStringValues(Constants.AUTH_TOKEN))
-                .enqueue(new Callback<loginResponse>() {
+                .enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<loginResponse> call, Response<loginResponse> response) {
+                    public void onResponse(Call<Void> call, Response<Void> response) {
 
                         phimpmeProgressBarHandler.hide();
 
@@ -167,12 +168,12 @@ public class HomeActivity extends AppCompatActivity implements DialogueUtils.Ale
                                 e.printStackTrace();
                             }
                         } else {
-                            PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, response.body().getMessage(), 5000);
+                            //PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, response.body().getMessage(), 5000);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<loginResponse> call, Throwable t) {
+                    public void onFailure(Call<Void> call, Throwable t) {
                         phimpmeProgressBarHandler.hide();
                         PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, t.getMessage(), 5000);
                         // Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
