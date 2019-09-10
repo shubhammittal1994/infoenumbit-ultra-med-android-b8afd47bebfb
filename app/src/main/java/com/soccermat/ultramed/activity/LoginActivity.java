@@ -20,7 +20,6 @@ import com.soccermat.ultramed.R;
 import com.soccermat.ultramed.connection.RetrofitClient;
 import com.soccermat.ultramed.helper.Constants;
 import com.soccermat.ultramed.models.loginResponse;
-import com.soccermat.ultramed.utils.DialogueUtils;
 import com.soccermat.ultramed.utils.KeyBoardUtils;
 import com.soccermat.ultramed.utils.PhimpmeProgressBarHandler;
 import com.soccermat.ultramed.utils.PreferenceManager;
@@ -158,8 +157,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         phimpmeProgressBarHandler.hide();
                         Log.v("->>>" , response.toString());
 
-                        //show user dialog that you havnt activated the link on gmail.
-                        DialogueUtils.alertDialogShow(LoginActivity.this,"Your Error Message");
 
                         if (response.code() == HTTP_OK) {
                             try {
@@ -180,9 +177,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                        }
+                  }
+//                        else if(response.code() == ){
+//                            //show user dialog that you havnt activated the link on gmail.
+//                            DialogueUtils.alertDialogShow(LoginActivity.this,"Your Error Message");
+//
+//                        }
                         else {
-                            PhimpmeProgressBarHandler.showSnackBar(scrollViewLogin, "abc",5000);
+                            PhimpmeProgressBarHandler.showSnackBar(scrollViewLogin, response.message(),5000);
                         }
                     }
 
