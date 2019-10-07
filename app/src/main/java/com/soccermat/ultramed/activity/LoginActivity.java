@@ -16,14 +16,26 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.soccermat.ultramed.R;
 import com.soccermat.ultramed.connection.RetrofitClient;
 import com.soccermat.ultramed.helper.Constants;
-import com.soccermat.ultramed.models.loginResponse;
+
+import com.soccermat.ultramed.models.LoginResponse;
 import com.soccermat.ultramed.utils.KeyBoardUtils;
 import com.soccermat.ultramed.utils.PhimpmeProgressBarHandler;
 import com.soccermat.ultramed.utils.PreferenceManager;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -87,8 +99,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.text_forgotpassword: {
                 forgetPassword();
 
-
-
             }
             case R.id.text_register: {
                 register();
@@ -150,9 +160,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         phimpmeProgressBarHandler.show();
         RetrofitClient.getClient()
                 .loginUser(edittext_email.getText().toString(),edittext_password.getText().toString())
-                .enqueue(new Callback<loginResponse>() {
+                .enqueue(new Callback<LoginResponse>() {
                     @Override
-                    public void onResponse(Call<loginResponse> call, Response<loginResponse> response) {
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                         phimpmeProgressBarHandler.hide();
                         Log.v("->>>" , response.toString());
@@ -170,7 +180,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                pref.setBooleanValues(Constants.IS_LOGGED_IN,true);
 
                                //set-Auth token here
-                               pref.setStringValues(Constants.AUTH_TOKEN,response.body().getData().getAccessToken());
+                              // pref.setStringValues(Constants.AUTH_TOKEN,response.body().getData().getAccessToken());
                                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                 finish();
 
@@ -184,15 +194,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //
 //                        }
                         else {
-                            PhimpmeProgressBarHandler.showSnackBar(scrollViewLogin, response.message(),5000);
+
+                            PhimpmeProgressBarHandler.showSnackBar(scrollViewLogin, response.body().getMessage(),5000);
+
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<loginResponse> call, Throwable t) {
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
                         phimpmeProgressBarHandler.hide();
                         PhimpmeProgressBarHandler.showSnackBar(scrollViewLogin, t.getMessage(),5000);
-                        Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                       // Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
 
 

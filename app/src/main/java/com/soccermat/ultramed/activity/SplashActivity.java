@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class SplashActivity extends AppCompatActivity {
     OrmLiteDB ormLiteDb;
-    //    String exerciseName[] = {"cuello", "humbros", "codos", "cadera", "munacas", "dedos", "rodillas", "tobillos"};
+//    String exerciseName[] = {"cuello", "humbros", "codos", "cadera", "munacas", "dedos", "rodillas", "tobillos"};
     String exerciseName[] = {"cuello", "humbros", "codos", "cadera", "munacas", "rodillas", "tobillos"};
 
     LinkedHashMap<String, String> subExerciseMap = new LinkedHashMap<>();
@@ -41,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
 
         setSubExerciseData();
         saveExerciseAndSubExercise();
-        pref = new PreferenceManager(this);
+        pref=new PreferenceManager(this);
         updateData();
        /* try {
             RetrofitClient.disableSSLCertificateChecking();
@@ -171,8 +171,8 @@ public class SplashActivity extends AppCompatActivity {
 //                "tobillos_first", "tobillos_second", "tobillos_third"};
 
         String subExerciseName[] = {"cuello_first", "cuello_second", "cuello_third", "humbros_first", "humbros_second", "humbros_third",
-                "codos_first", "codos_second", "codos_third", "cadera_first", "cadera_second", "cadera_third", "cadera_fourth", "cadera_fifth", "cadera_sixth", "munacas_first", "munacas_second",
-                "munacas_third", "munacas_fourth", "munacas_fifth", "munacas_sixth", "rodillas_first", "rodillas_second", "rodillas_third", "rodillas_fourth",
+                "codos_first", "codos_second","codos_third", "cadera_first", "cadera_second", "cadera_third","cadera_fourth","cadera_fifth","cadera_sixth", "munacas_first", "munacas_second",
+                "munacas_third","munacas_fourth", "munacas_fifth", "munacas_sixth", "rodillas_first", "rodillas_second","rodillas_third","rodillas_fourth",
                 "tobillos_first", "tobillos_second", "tobillos_third"};
 
         subExerciseMap.put(subExerciseName[0], exerciseName[0]);
@@ -187,7 +187,7 @@ public class SplashActivity extends AppCompatActivity {
         subExerciseMap.put(subExerciseName[7], exerciseName[2]);
         subExerciseMap.put(subExerciseName[8], exerciseName[2]);
 
-        subExerciseMap.put(subExerciseName[9], exerciseName[3]);
+        subExerciseMap.put(subExerciseName[9],  exerciseName[3]);
         subExerciseMap.put(subExerciseName[10], exerciseName[3]);
         subExerciseMap.put(subExerciseName[11], exerciseName[3]);
         subExerciseMap.put(subExerciseName[12], exerciseName[3]);

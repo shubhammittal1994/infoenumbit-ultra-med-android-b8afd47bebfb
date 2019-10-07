@@ -1,8 +1,6 @@
 package com.soccermat.ultramed.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -16,13 +14,15 @@ import android.widget.Toast;
 
 import com.soccermat.ultramed.R;
 import com.soccermat.ultramed.activity.ExerciseDetailsActivity;
-import com.soccermat.ultramed.activity.HomeActivity;
-import com.soccermat.ultramed.activity.InformationActivity;
+import com.soccermat.ultramed.connection.RetrofitClient;
 import com.soccermat.ultramed.database.OrmLiteDB;
-import com.soccermat.ultramed.helper.StaticSharedpreference;
+import com.soccermat.ultramed.models.DatumData;
+import com.soccermat.ultramed.models.GetAllExerciseCategory;
 import com.soccermat.ultramed.models.SubExerciseDoneModel;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
+import com.soccermat.ultramed.utils.PhimpmeProgressBarHandler;
+import com.soccermat.ultramed.utils.PreferenceManager;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -31,10 +31,19 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static java.net.HttpURLConnection.HTTP_OK;
+
 public class MyExerciseFragment extends Fragment implements View.OnClickListener {
     View rootView;
 
     public static boolean isChangedImage = false;
+
+    PhimpmeProgressBarHandler phimpmeProgressBarHandler;
+    PreferenceManager pref;
     ImageView imgDummy;
     CardView btnCuello, btnHumbros, btnCodos, btnCadera, btnMunecas, btnDedos, btnRodillas, btnTobillos;
     ImageView imgWatch1, imgWatch2, imgWatch3, imgWatch4, imgWatch5, imgWatch6, imgWatch7, imgWatch8;
@@ -43,12 +52,18 @@ public class MyExerciseFragment extends Fragment implements View.OnClickListener
     ImageView imgRodilla,imgBody1, imgBody2, imgBody3, imgBody4, imgBody5, imgBody6, imgBody7, imgBody8;
     View click1, click2, click21, click3, click31, click4, click41, click5, click51, click7, click71, click8, click81;
     String strImg1="",strImg2="",strImg3="",strImg4="",strImg5="",strImg6="",strImg7="",strImg8="";
+    GetAllExerciseCategory getAllExerciseCategory;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_my_exercise, container, false);
         initViews();
+
+
+        phimpmeProgressBarHandler = new PhimpmeProgressBarHandler(getActivity());
+        pref=new PreferenceManager(getActivity());
+        all_exercise_category();
 
         return rootView;
     }
@@ -132,19 +147,135 @@ public class MyExerciseFragment extends Fragment implements View.OnClickListener
         btnRodillas.setOnClickListener(this);
         btnTobillos.setOnClickListener(this);
 
+        btnCuello.setEnabled(false);
+        btnHumbros.setEnabled(false);
+        btnCodos.setEnabled(false);
+        btnCadera.setEnabled(false);
+        btnMunecas.setEnabled(false);
+        btnDedos.setEnabled(false);
+        btnRodillas.setEnabled(false);
+        btnTobillos.setEnabled(false);
+
+
+        btnCuello.setAlpha(0.5f);
+        btnHumbros.setAlpha(0.5f);
+        btnCodos.setAlpha(0.5f);
+        btnCadera.setAlpha(0.5f);
+        btnMunecas.setAlpha(0.5f);
+        btnDedos.setAlpha(0.5f);
+        btnRodillas.setAlpha(0.5f);
+        btnTobillos.setAlpha(0.5f);
+
+
+
+        tvTime1.setAlpha(0.5f);
+        tvTime2.setAlpha(0.5f);
+        tvTime3.setAlpha(0.5f);
+        tvTime4.setAlpha(0.5f);
+        tvTime5.setAlpha(0.5f);
+        tvTime6.setAlpha(0.5f);
+        tvTime7.setAlpha(0.5f);
+        tvTime8.setAlpha(0.5f);
+
+        imgWatch1.setAlpha(0.5f);
+        imgWatch2.setAlpha(0.5f);
+        imgWatch3.setAlpha(0.5f);
+        imgWatch4.setAlpha(0.5f);
+        imgWatch5.setAlpha(0.5f);
+        imgWatch6.setAlpha(0.5f);
+        imgWatch7.setAlpha(0.5f);
+        imgWatch8.setAlpha(0.5f);
+
+
+
 
 
     }
+
+    void setVisibilty(){
+        if(getAllExerciseCategory!=null){
+            for(DatumData data: getAllExerciseCategory.getData()){
+
+
+                if(data.getName().equalsIgnoreCase("cuello")){
+                    btnCuello.setAlpha(1f);
+                    btnCuello.setEnabled(true);
+                    tvTime1.setAlpha(1f);
+                    tvTime1.setText(data.getTimer()+" seg.");
+                    imgWatch1.setAlpha(1f);
+
+
+                }
+                else if(data.getName().equalsIgnoreCase("humbros")){
+
+                    btnHumbros.setAlpha(1f);
+                    tvTime2.setAlpha(1f);
+                    btnHumbros.setEnabled(true);
+                    imgWatch2.setAlpha(1f);
+                    tvTime2.setText(data.getTimer()+" seg.");
+
+                }
+                else if(data.getName().equalsIgnoreCase("codos")){
+                    btnCodos.setAlpha(1f);
+                    tvTime3.setAlpha(1f);
+                    btnCodos.setEnabled(true);
+                    imgWatch3.setAlpha(1f);
+                    tvTime3.setText(data.getTimer()+" seg.");
+
+                }
+                else if(data.getName().equalsIgnoreCase("cadera")){
+                    btnCadera.setAlpha(1f);
+                    tvTime4.setAlpha(1f);
+                    btnCadera.setEnabled(true);
+                    imgWatch4.setAlpha(1f);
+                    tvTime4.setText(data.getTimer()+" seg.");
+
+                }
+                else if(data.getName().equalsIgnoreCase("munacas")){
+                    btnMunecas.setAlpha(1f);
+                    tvTime5.setAlpha(1f);
+                    btnMunecas.setEnabled(true);
+                    imgWatch5.setAlpha(1f);
+                    tvTime5.setText(data.getTimer()+" seg.");
+
+                }
+                else if(data.getName().equalsIgnoreCase("rodillas")){
+                    btnRodillas.setAlpha(1f);
+                    tvTime6.setAlpha(1f);
+                    btnRodillas.setEnabled(true);
+                    imgWatch6.setAlpha(1f);
+                    tvTime6.setText(data.getTimer()+" seg.");
+
+                }
+                else if(data.getName().equalsIgnoreCase("tobillos")){
+                    btnTobillos.setAlpha(1f);
+                    tvTime7.setAlpha(1f);
+                    btnTobillos.setEnabled(true);
+                    imgWatch7.setAlpha(1f);
+                    tvTime7.setText(data.getTimer()+" seg.");
+
+                }
+//                else if(data.getName().equalsIgnoreCase("tobillos")){
+//
+//                }
+            }
+
+        }
+    }
+
 
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(getActivity(), ExerciseDetailsActivity.class);
         switch (view.getId()) {
             case R.id.btnCuello:
-            case R.id.click1:
+            case R.id.click1: {
 
-                intent.putExtra("id", "cuello");
+
+                    intent.putExtra("id", "cuello");
+
                 break;
+            }
 
             case R.id.btnHumbros:
             case R.id.click2:
@@ -434,6 +565,46 @@ public class MyExerciseFragment extends Fragment implements View.OnClickListener
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+    }
+
+
+    private void all_exercise_category() {
+
+        phimpmeProgressBarHandler.show();
+        RetrofitClient.getClient()
+                .getAllExerciseCategory("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjdjNDg2MWUzYzMyZDdmNWM5NWYzNzIxNWY2NjUxY2Q5Zjg3MmQ2YjNjMWYxODNhYjNmNzEwYzU5NGRmNjkyMTJkNDk3NmU0MTY5NTRkNzQ0In0.eyJhdWQiOiIxIiwianRpIjoiN2M0ODYxZTNjMzJkN2Y1Yzk1ZjM3MjE1ZjY2NTFjZDlmODcyZDZiM2MxZjE4M2FiM2Y3MTBjNTk0ZGY2OTIxMmQ0OTc2ZTQxNjk1NGQ3NDQiLCJpYXQiOjE1Njk4NzA1NzksIm5iZiI6MTU2OTg3MDU3OSwiZXhwIjoxNjAxNDkyOTc5LCJzdWIiOiI2OSIsInNjb3BlcyI6W119.Og7-AXazLjn_Cj9fqLdeSk8RtP6FIBHM1-6yyOURxPcqy31_AOLnW0yAtyNgu8Maf2JTe92CFwSAxPoqinF71KZ9DLkCYF7qnYKbgj5eag5DUotBfOBHTKQUwj96KIcKD7pjqgo--x3tpaKo0PNKJXEiVgnFb28_P_4tUtSWF77kwxk8oQ4QmH7BCwuJm684ZABWWyExvRle7fJ5-4PnejUE4eVBGcaD1IepWFg3MutQhsfDPE9PZzc-cBrLIzP60gd6H5pkMW7CYJmXU2o82HdJMx-dEEdLzOZY_Tg89JdL_ajVAntj7BvRzgu7g5_LdnW9tDylldlouibAa0eY2np9rM-qp8rxCqxo13PZ5Jqjpwb0fjh3u3hLDWqbjKh4bfIjq_19ekz6lufwB7D4MdVLqm3LwCZ6BVyRGFulX_pRWbsvN1RjLWgI0FRlQkKH0FePawHbh7H21dQgfuqt_zPc0rSFGQ5eSWzRbMBVb22XpEoqtSs2nWjfk5RJ2qTASIaVnKIqlbzhg6saD5nT-Bpve3rRY2xtC3_GGBpkfDOk3TE_VRmVM80BrsgdTRMQUDx0Nrunwm59sIcoITG9DRj7YcLh-9qdZhYkYVtQqHS81jBgEBVe0yvxg9289UNIG6jeLSwdo4HI9wLiE-JSnirsBoETLtmkE73od38E86s")
+                .enqueue(new Callback<GetAllExerciseCategory>() {
+                    @Override
+                    public void onResponse(Call<GetAllExerciseCategory> call, Response<GetAllExerciseCategory> response) {
+
+                        phimpmeProgressBarHandler.hide();
+
+                        if (response.code() == HTTP_OK) {
+                            try {
+
+                                getAllExerciseCategory=response.body();
+                                setVisibilty();
+
+                               Log.d("--->>>",response.body().getData().toString());
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            //PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, response.body().getMessage(), 5000);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<GetAllExerciseCategory> call, Throwable t) {
+                        phimpmeProgressBarHandler.hide();
+                        //PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, t.getMessage(), 5000);
+                        // Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+
+                });
 
     }
 

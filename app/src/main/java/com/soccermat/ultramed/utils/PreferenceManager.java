@@ -24,7 +24,7 @@ public class PreferenceManager {
 
     public void setStringValues(String key , String DataToSave ) {
         SharedPreferences.Editor editor = getPreferences().edit();
-        Log.e("DatatoDave",DataToSave);
+      //  Log.e("DatatoDave",DataToSave);
         editor.putString(key, DataToSave);
         editor.apply();
 

@@ -1,18 +1,24 @@
 package com.soccermat.ultramed.activity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.UpdateBuilder;
+import com.j256.ormlite.stmt.Where;
+import com.j256.ormlite.table.TableUtils;
 import com.soccermat.ultramed.R;
 import com.soccermat.ultramed.connection.RetrofitClient;
 import com.soccermat.ultramed.database.OrmLiteDB;
@@ -21,10 +27,16 @@ import com.soccermat.ultramed.fragment.MyExerciseFragment;
 import com.soccermat.ultramed.fragment.NotasFragment;
 import com.soccermat.ultramed.fragment.ReportsFragment;
 import com.soccermat.ultramed.helper.Constants;
-import com.soccermat.ultramed.models.loginResponse;
+import com.soccermat.ultramed.helper.StaticSharedpreference;
+import com.soccermat.ultramed.models.SubExerciseDoneModel;
+import com.soccermat.ultramed.models.SubExerciseNameModel;
+
 import com.soccermat.ultramed.utils.DialogueUtils;
 import com.soccermat.ultramed.utils.PhimpmeProgressBarHandler;
 import com.soccermat.ultramed.utils.PreferenceManager;
+
+import java.io.File;
+import java.sql.SQLException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -100,10 +112,17 @@ public class HomeActivity extends AppCompatActivity implements DialogueUtils.Ale
     }
 
     @Override
+    public void onBackPressed() {
+      //  super.onBackPressed();
+        alertDialogHelper.showAlertDialog("Draft", "Discard draft ?", "Logout", "Cancel", "", 1, true);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        alertDialogHelper.showAlertDialog("Draft", "Discard draft ?", "Logout", "Cancel", "", 1, true);
+        Log.e("call","call");
+
 
 
     }
@@ -127,31 +146,34 @@ public class HomeActivity extends AppCompatActivity implements DialogueUtils.Ale
         phimpmeProgressBarHandler.show();
         RetrofitClient.getClient()
                 .logoutUser(pref.getStringValues(Constants.AUTH_TOKEN))
-                .enqueue(new Callback<loginResponse>() {
+                .enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<loginResponse> call, Response<loginResponse> response) {
+                    public void onResponse(Call<Void> call, Response<Void> response) {
 
                         phimpmeProgressBarHandler.hide();
 
                         if (response.code() == HTTP_OK) {
                             try {
 
+                               // PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, HomeActivity.this.getString(R.string.successfully_logout), 000);
                                 //clear prefrence here
                                 pref.clearPrefrence();
                                 Toast.makeText(getApplicationContext(), "token::"+pref.getStringValues(Constants.AUTH_TOKEN), Toast.LENGTH_SHORT).show();
 
+                                pref.setBooleanValues(Constants.IS_LOGGED_IN,false);
+                                pref.setStringValues(Constants.AUTH_TOKEN,null);
                                 finish();
 
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         } else {
-                            PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, response.body().getMessage(), 5000);
+                            //PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, response.body().getMessage(), 5000);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<loginResponse> call, Throwable t) {
+                    public void onFailure(Call<Void> call, Throwable t) {
                         phimpmeProgressBarHandler.hide();
                         PhimpmeProgressBarHandler.showSnackBar(relativeLayoutHome, t.getMessage(), 5000);
                         // Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();

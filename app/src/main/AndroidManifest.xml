@@ -26,7 +26,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name="com.soccermat.ultramed.activity.SplashActivity"
+            android:name=".activity.HomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,9 +55,9 @@
             android:name="com.soccermat.ultramed.activity.InstructionActivity"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name="com.soccermat.ultramed.activity.HomeActivity"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name="com.soccermat.ultramed.activity.HomeActivity"-->
+            <!--android:screenOrientation="portrait" />-->
         <activity
             android:name="com.soccermat.ultramed.activity.ExerciseDetailsActivity"
             android:screenOrientation="portrait" />

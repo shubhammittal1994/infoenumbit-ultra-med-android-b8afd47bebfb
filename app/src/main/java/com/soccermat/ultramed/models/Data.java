@@ -4,7 +4,6 @@ package com.soccermat.ultramed.models;
 
 import com.google.gson.annotations.SerializedName;
 
-@SuppressWarnings("unused")
 public class Data {
 
     @SerializedName("access_token")
