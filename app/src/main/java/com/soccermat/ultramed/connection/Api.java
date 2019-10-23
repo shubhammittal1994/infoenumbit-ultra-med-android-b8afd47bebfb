@@ -1,18 +1,26 @@
 package com.soccermat.ultramed.connection;
 
-import com.soccermat.ultramed.models.GetAllExerciseCategory;
-import com.soccermat.ultramed.models.LoginResponse;
-import com.soccermat.ultramed.models.RegisterResponse;
+import com.soccermat.ultramed.models.DataDTO;
+import com.soccermat.ultramed.models.ExersiesResultRequest;
+import com.soccermat.ultramed.models.GetCategoryExerciseWithID;
+import com.soccermat.ultramed.models.GetExercieseResponse;
 
+import com.soccermat.ultramed.models.RegisterResponse;
+import com.soccermat.ultramed.models.ResponseDTO;
+import com.soccermat.ultramed.models.ResponseGetCategoriesResponse;
+
+
+import java.util.HashMap;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 
 public interface Api {
 
@@ -33,19 +41,23 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("/api/login")
-    Call<LoginResponse> loginUser(@Field("email") String email, @Field("password") String password);
+    Call<ResponseDTO> loginUser(@Field("email") String email, @Field("password") String password);
 
 
 
     @GET("/api/logout")
     Call<Void> logoutUser(@Header("authorization") String token);
 
-    @GET("api/all_exercise_category")
-    Call<GetAllExerciseCategory> getAllExerciseCategory(@Header("authorization") String token);
+
+    @POST("api/all_exercise_category")
+    Call<ResponseGetCategoriesResponse> getAllExerciseCategory(@Header("authorization") String token, @Body ExersiesResultRequest user_id);
 
 
-    @GET("api/get_category_exercise/{id}")
-    Call<GetAllExerciseCategory> getAllExerciseCategory(@Header("authorization") String token,@Path("id") int id);
+
+
+    @FormUrlEncoded
+    @POST("api/get_category_exercise")
+    Call<GetExercieseResponse> getCategoryExercise(@Header("authorization") String token ,@Field("user_id") String user_id,@Field("category_id") String category_id);
 
 
 
