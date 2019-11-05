@@ -8,6 +8,7 @@ import com.soccermat.ultramed.models.GetExercieseResponse;
 import com.soccermat.ultramed.models.RegisterResponse;
 import com.soccermat.ultramed.models.ResponseDTO;
 import com.soccermat.ultramed.models.ResponseGetCategoriesResponse;
+import com.soccermat.ultramed.models.StatusClass;
 
 
 import java.util.HashMap;
@@ -59,6 +60,10 @@ public interface Api {
     @POST("api/get_category_exercise")
     Call<GetExercieseResponse> getCategoryExercise(@Header("authorization") String token ,@Field("user_id") String user_id,@Field("category_id") String category_id);
 
+
+    @FormUrlEncoded
+    @POST("api/change_status_category")
+    Call<StatusClass> setStatus(@Header("authorization") String token , @Field("user_id") String user_id, @Field("category_id") String category_id, @Field("status") int status);
 
 
 //    @POST("/api/register")
